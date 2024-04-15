@@ -13,12 +13,13 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   return (
-    <Tabs screenOptions={{headerShown: false,}}>
+    <Tabs screenOptions={{headerShown: false,}} initialRouteName='index'>
       <Tabs.Screen
         name="index"
         options={{
           tabBarShowLabel:false,
           tabBarActiveTintColor: Colors.primary,
+          tabBarStyle:  { height: 60 },
           tabBarIcon: ({ color }) => <TabBarIcon name="tasks" color={color} />,
         }}
       />

@@ -18,8 +18,8 @@ const LandingScreen = () => {
                 className="w-[200px] h-[185px]"
               />
             </View>
-            <Text className="text-2xl font-bold text-primary">Get Things done.</Text>
-            <Text className="w-72 text-base font-normal capitalize text-gray-400">
+            <Text className="text-2xl font-poppins-black text-primary">Get Things done.</Text>
+            <Text className="w-72 text-base font-poppins-semiBold capitalize text-gray-400">
               Just clicks away from capturing your next million $$ Idea!
             </Text>
           </View>
@@ -32,7 +32,7 @@ const LandingScreen = () => {
           <View className="relative">
             <TouchableOpacity
               className="absolute -bottom-10 -right-11"
-              onPress={() => router.push('/(auth)/sign-in')}
+              onPress={() => router.replace('/(auth)/sign-in')}
             >
               <FontAwesome6 name="arrow-right" size={56} color="white" />
             </TouchableOpacity>
