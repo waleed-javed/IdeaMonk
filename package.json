@@ -8,6 +8,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watchAll",
+    "pretty":"prettier --write './**/*.{ts,tsx}'",
     "clean-android": "cd android && rm -R .gradle && cd app && rm -R build",
     "reset": "rm -rf node_modules/ && npm cache clear && watchman watch-del-all && npm i",
     "debug-build": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res/ && cd android && ./gradlew assembleDebug && cd app/src/main/res/ && rmdir /S /Q raw && rmdir /S /Q drawable-mdpi",
@@ -46,6 +47,8 @@
     "jest-expo": "~50.0.4",
     "nativewind": "^2.0.11",
     "npm": "^10.5.2",
+    "prettier": "^3.2.5",
+    "prettier-plugin-tailwindcss": "^0.5.13",
     "react-test-renderer": "18.2.0",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.1.3"

@@ -8,13 +8,11 @@
     "scheme": "ideamonk",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/landingSplash.png",
+      "image": "./assets/images/splashScreen.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
@@ -29,9 +27,7 @@
       "output": "static",
       "favicon": "./assets/images/appIcon.png"
     },
-    "plugins": [
-      "expo-router"
-    ],
+    "plugins": ["expo-router"],
     "experiments": {
       "typedRoutes": true
     }

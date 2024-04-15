@@ -1,38 +1,41 @@
-import { View, Text, TouchableOpacity } from "react-native";
-import React from "react";
-import { router } from "expo-router";
+import { View, Text, TouchableOpacity, Image } from 'react-native';
+import React from 'react';
+import { router } from 'expo-router';
 import { FontAwesome6 } from '@expo/vector-icons';
+import CheckMark from '../Aesthetics/CheckMark';
 
 const LandingScreen = () => {
   return (
     <View className="h-full">
-      <View className="flex flex-1  bg-white items-start justify-end">
-
+      <View className="flex flex-1  items-start justify-end bg-white">
         {/* Landing CTA Container View */}
         <View className="pb-36 pl-6">
-          <View className="space-y-3">
-        <View
-          className="w-[135px] h-[135px] border-primary transform -rotate-6 translate-x-8 -translate-y-4 rounded-md bg-yellow items-center justify-center"
-        >
-          <FontAwesome6 name="check" size={86} color="white" />
-        </View>
-            <Text className="font-bold text-primary text-2xl">
-              Get Things done.
-            </Text>
-            <Text className="font-normal w-72 text-gray-400 capitalize text-base">
+          <View className="gap-y-1">
+            <View className="-mb-6">
+              <Image
+                source={require('../../assets/images/LoginCheck.png')}
+                resizeMode="contain"
+                className="w-[200px] h-[185px]"
+              />
+            </View>
+            <Text className="text-2xl font-bold text-primary">Get Things done.</Text>
+            <Text className="w-72 text-base font-normal capitalize text-gray-400">
               Just clicks away from capturing your next million $$ Idea!
             </Text>
-            </View>
+          </View>
         </View>
       </View>
-      
+
       {/* CTA Button  */}
-      <View className="flex justify-center items-end bg-white">
-        <View className="bg-secondary w-2/5 h-[20vh] rounded-tl-full items-center justify-center">
+      <View className="flex items-end justify-center bg-white">
+        <View className="h-[20vh] w-2/5 items-center justify-center rounded-tl-full bg-secondary">
           <View className="relative">
-          <TouchableOpacity className="absolute -bottom-10 -right-11" onPress={()=> router.push('/(auth)/sign-in')}>
-            <FontAwesome6 name="arrow-right" size={56} color="white" />
-          </TouchableOpacity>
+            <TouchableOpacity
+              className="absolute -bottom-10 -right-11"
+              onPress={() => router.push('/(auth)/sign-in')}
+            >
+              <FontAwesome6 name="arrow-right" size={56} color="white" />
+            </TouchableOpacity>
           </View>
         </View>
       </View>
