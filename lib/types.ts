@@ -12,16 +12,18 @@ export type Images ={
     url:string
     version:string;
   }
-  
+
  export type Task = {
       id: string;
+      date:string;
+      priority:string;
       title: string
       description: string
       technologies: Technologies[],
       isFinished: Boolean,
       images:Images [],
-    }
-    
-export type Tasks = Task[]
-  
-  
+    }  
+
+export type TaskCategoryRecordType = {
+    [key: string]: Task[];
+  }

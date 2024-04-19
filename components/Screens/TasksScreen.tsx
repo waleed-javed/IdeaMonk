@@ -1,171 +1,45 @@
-import { View, Text, ScrollView, Image, TextInput, FlatList } from 'react-native';
+import { View, Text, FlatList, TextInput} from 'react-native';
 import React from 'react';
-import { FontAwesome5, MaterialIcons } from '@expo/vector-icons';
+import { FontAwesome5, MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import Colors from '@/constants/Colors';
 import DashboardHeader from '../CutomComponents/DashboardHeader';
-import { Tasks } from '@/lib/types';
-import TaskCard from '../CutomComponents/TaskCard';
+import { Task} from '@/lib/types';
+import { useTask } from '@/context/TasksContextProvider';
+import TaskContainer from '../CutomComponents/TaskContainer';
 
-const dummyTask: Tasks = [
-  {
-    id: '6c08d1be-1a60-4304-9faa-136b4f76b29c',
-    title: 'A very very long task item title description to see how it will look in app interface in case someone writes this long',
-    description: "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Laborum quas voluptatum laudantium veritatis magnam animi eum consectetur molestiae, ratione vitae saepe. Repudiandae optio perferendis saepe consequuntur nisi dignissimos alias iusto vero veniam ipsam! Inventore esse vitae dicta cum id ullam iusto quae ipsa, fugit aliquam sapiente consequatur! Excepturi, optio quas?",
-    technologies: [
-      {
-        id: '1',
-        url: 'https://sample.org',
-        icon: 'https://picsum.photos/200',
-        value: 'React',
-        label: 'React',
-        version: '1',
-      },
-      {
-        id: '2',
-        url: 'https://sample.org',
-        icon: 'https://picsum.photos/200',
-        value: 'Node',
-        label: 'Node',
-        version: '1',
-      },
-      {
-        id: '3',
-        url: 'https://sample.org',
-        icon: 'https://picsum.photos/200',
-        value: 'AWS',
-        label: 'AWS',
-        version: '1',
-      },
-    ],
-    isFinished: true,
-    images: [
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b29c', url: 'https://picsum.photos/200/300' },
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b30b', url: 'https://picsum.photos/200/300' },
-    ],
-  },
-  {
-    id: '21d8bc1a-06d0-4947-a1fb-61285111e053',
-    title: 'Task 2',
-    description: 'Task 2 description',
-    technologies: [
-      {
-        id: '2',
-        url: 'https://sample.org',
-        icon: 'https://picsum.photos/200',
-        value: 'Node',
-        label: 'Node',
-        version: '2',
-      },
-    ],
-    isFinished: false,
-    images: [
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b28c', url: 'https://picsum.photos/200/300' },
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b31b', url: 'https://picsum.photos/200/300' },
-    ],
-  },
-  {
-    id: '2a66a11f-3668-482e-aa52-a07f3fec77da',
-    title: 'Task 3',
-    description: 'Task 3 description',
-    technologies: [
-      {
-        id: '3',
-        url: 'https://sample.org',
-        icon: 'https://picsum.photos/200',
-        value: 'Next',
-        label: 'Next',
-        version: '3',
-      },
-    ],
-    isFinished: false,
-    images: [
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b27c', url: 'https://picsum.photos/200/300' },
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b32b', url: 'https://picsum.photos/200/300' },
-    ],
-  },
-  {
-    id: '2001e82c-f158-435c-b9d5-c5c9ae56aa12',
-    title: 'Task 4',
-    description: 'Task 4 description',
-    technologies: [
-      {
-        id: '4',
-        url: 'https://sample.org',
-        icon: 'https://picsum.photos/200',
-        value: 'AWS',
-        label: 'AWS',
-        version: '4',
-      },
-    ],
-    isFinished: false,
-    images: [
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b26c', url: 'https://picsum.photos/200/300' },
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b33b', url: 'https://picsum.photos/200/300' },
-    ],
-  },
-  {
-    id: 'b0e29691-6625-42ae-ad15-0794ba9094d2',
-    title: 'Task 5',
-    description: 'Task 5 description',
-    technologies: [
-      {
-        id: '5',
-        url: 'https://sample.org',
-        icon: 'https://picsum.photos/200',
-        value: 'MongoDB',
-        label: 'Mondo Db',
-        version: '5',
-      },
-    ],
-    isFinished: false,
-    images: [
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b25c', url: 'https://picsum.photos/200/300' },
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b33b', url: 'https://picsum.photos/200/300' },
-    ],
-  },
-  {
-    id: 'b0e29691-6625-42ae-ad15-0794ba9095d2',
-    title: 'Task 6',
-    description: 'Task 6 description',
-    technologies: [
-      {
-        id: '5',
-        url: 'https://sample.org',
-        icon: 'https://picsum.photos/200',
-        value: 'MongoDB',
-        label: 'Mondo Db',
-        version: '5',
-      },
-    ],
-    isFinished: false,
-    images: [
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b25c', url: 'https://picsum.photos/200/300' },
-      { id: '6c08d1be-1a60-4304-9faa-136b4f76b33b', url: 'https://picsum.photos/200/300' },
-    ],
-  },
-];
 
 const TasksScreen = () => {
-  const [tasks, setTasks] = React.useState(dummyTask || []);
+  const {tasks, setTasks, onItemPressedToggleStatusCompleted, onDelete} = useTask();
 
   return (
-    <View>
+    <View >
       <DashboardHeader />
-      <Options />
-      <FlatList
-      horizontal={false}
-      style={{marginBottom:204}}
+      <Options />      
+        <TaskContainer/>
+      {/* <FlatList
         data={tasks}
-        renderItem={({ item }) => <TaskCard card={item} />}
+        horizontal={false}
+        style={{ marginBottom: 204 }}
         keyExtractor={(item) => item.id}
-      />
+        ItemSeparatorComponent={() => <View className="mb-3" />}
+        renderItem={({ item }) => {
+          return (
+            <View onTouchEnd={()=> onItemPressedToggleStatusCompleted(item.id)}>
+            <TaskCard task={item} />
+            </View>
+          );
+        }}
+        ListFooterComponent={()=>(<View>
+          <TextInput placeholder='task ...' className='border border-primary' />
+        </View>)}
+      /> */}
     </View>
   );
 };
 
 export default TasksScreen;
 
-export const Options = () => {
+const Options = () => {
   return (
     <View className="flex-row items-center justify-around py-2">
       <OptionItem title="List" icon="tasks" iconFactory="FontAwesome5" />
@@ -175,7 +49,7 @@ export const Options = () => {
   );
 };
 
-export const OptionItem = ({
+const OptionItem = ({
   title,
   icon,
   iconFactory,
@@ -199,3 +73,24 @@ export const OptionItem = ({
     </View>
   );
 };
+
+const TaskCard = ({task}: {task: Task}) => {
+  
+  return (
+    <View className="mx-2 p-1 rounded-md  justify-between border border-primary">
+    <View className='flex-row items-center'>
+    <MaterialCommunityIcons name={task.isFinished ? 'checkbox-marked-circle' : 'checkbox-blank-circle-outline'} size={25} color={Colors.primary} style={{paddingHorizontal:4}}/>
+    <Text  className={`text-[16px] font-poppins-light pt-1 ${task.isFinished && 'line-through'} max-w-xs`}>{task.title}</Text>
+    </View>
+
+    <View className='items-center justify-between flex-row'>
+      <Text className='px-2 rounded-full text-gray-400 font-poppins-semiBold'>{task.date.slice(0,6)}</Text>
+      <Text className={`w-20 text-center 
+      ${task.priority == 'high' && 'bg-orange'}  
+      ${task.priority == 'medium' && 'bg-yellow'}
+      ${task.priority == 'low' && 'bg-support'}
+      px-2 rounded-full text-white font-poppins-semiBold`}>{task.priority}</Text>
+    </View>
+  </View>
+  ); 
+}
