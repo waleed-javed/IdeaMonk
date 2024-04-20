@@ -12,7 +12,7 @@ const Landing = () => {
       </SafeAreaView>
 
       {/* status bar does not need to altered so leave this */}
-      <StatusBar backgroundColor={"#fff"} style="dark" />
+      <StatusBar backgroundColor={Colors.primary} style="light" />
     </>
   );
 };
